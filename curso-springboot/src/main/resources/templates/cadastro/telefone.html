@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xlmns="http://www.w3.org/1999/xhtml" xlmns:th="http://www.thymeleaf.org">
+<head>
+<meta >
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<a th:href="@{/cadastropessoa}">Voltar</a>
+
+	<br>
+
+	<div th:each = "msgsError: ${msgErrors}">
+	
+		<span th:text="${msgsError}"></span>
+	
+	</div>
+
+	<br>
+
+	<div th:object="${pessoa}">
+		<label >Id:</label>
+		<h3 th:text="${pessoa.id}"></h3>
+		<label >Nome:</label>
+		<h3 th:text="${pessoa.nome}"></h3>
+		<label >Sobrenome:</label>
+		<h3 th:text="${pessoa.sobrenome}"></h3>
+		<label >Idade:</label>
+		<h3 th:text="${pessoa.idade}"></h3>
+	</div >
+	<hr>
+	<div th:each = "telefone : ${telefones}">
+		<hr>
+		<label >Id Telefone:</label>
+		<h3 th:text="${telefone.id}"></h3>
+		<label >Numero:</label>
+		<h3 th:text="${telefone.numero}"></h3>
+		<label >Tipo:</label>
+		<h3 th:text="${telefone.tipo}"></h3>
+		<td> <a th:href="@{/removertelefone/{idtelefone}(idtelefone=${telefone.id})}">Excluir</a></td>	
+		
+		<hr>
+	</div>
+	<hr>
+	
+	<form th:action="@{/cadastrartelefone/{pessoaid}(pessoaid=${pessoa.id})}" method="post">
+	<label for="numero">Numero:</label>
+	<input type="text" name="numero">
+	<label for="tipo">Tipo:</label>
+	<input type="text" name="tipo">
+	<input type="submit" value="enviar">
+	</form>
+	
+</body>
+</html>
